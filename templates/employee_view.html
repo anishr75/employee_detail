@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Employee Profile</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+
+.profile-header{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+margin-bottom:25px;
+}
+
+.profile-left{
+display:flex;
+align-items:flex-start;
+gap:14px;
+}
+
+.avatar{
+width:46px;
+height:46px;
+border-radius:50%;
+background:#e5e7eb;
+color:#374151;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:600;
+}
+
+.profile-name{
+font-size:22px;
+font-weight:700;
+margin-bottom:2px;
+}
+
+.subtitle{
+font-size:13px;
+color:#6b7280;
+}
+
+.back-btn{
+padding:6px 12px;
+border-radius:8px;
+border:1px solid #e5e7eb;
+background:white;
+font-size:14px;
+text-decoration:none;
+color:#374151;
+}
+
+.back-btn:hover{
+background:#f3f4f6;
+}
+
+.card-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
+}
+
+.info-card{
+background:white;
+border:1px solid #e5e7eb;
+border-radius:12px;
+padding:20px;
+box-shadow:0 2px 6px rgba(0,0,0,0.04);
+}
+
+.info-card h4{
+font-size:13px;
+letter-spacing:.5px;
+margin-bottom:18px;
+color:#64748b;
+border-bottom:1px solid #e5e7eb;
+padding-bottom:10px;
+}
+
+.info-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:22px 50px;
+}
+
+.info-grid label{
+display:block;
+font-size:12px;
+letter-spacing:0.4px;
+color:#64748b;
+margin-bottom:4px;
+}
+
+.info-grid p{
+margin:0;
+font-size:14px;
+font-weight:500;
+color:#0f172a;
+}
+
+.documents{
+margin-top:35px;
+}
+
+.documents h3{
+margin-bottom:15px;
+}
+
+.doc-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+}
+
+.doc-card{
+border:1px solid #e5e7eb;
+border-radius:10px;
+padding:20px;
+background:white;
+text-align:center;
+}
+
+.download-btn{
+display:inline-block;
+margin-top:8px;
+padding:6px 12px;
+background:#2563eb;
+color:white;
+border-radius:6px;
+text-decoration:none;
+font-size:13px;
+}
+
+.footer{
+text-align:center;
+font-size:12px;
+margin-top:25px;
+color:#64748b;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="nav-left">
+
+<div class="logo-box">HR</div>
+
+<div class="logo-text">
+<strong>HR Portal</strong>
+<span>Employee record management</span>
+</div>
+
+</div>
+
+<div class="nav-right">
+<a class="nav-btn" href="/">👤 Onboard</a>
+<a class="nav-btn active" href="/employees">📋 Employees</a>
+</div>
+
+</header>
+
+
+<div class="container">
+
+<div class="profile-header">
+
+<div class="profile-left">
+
+<div class="avatar">
+{{ employee.name.split()[0][0] }}{{ employee.name.split()[1][0] if employee.name.split()|length>1 else '' }}
+</div>
+
+<div>
+<div class="profile-name">{{ employee.name }}</div>
+<div class="subtitle">Employee profile</div>
+</div>
+
+</div>
+
+<a class="back-btn" href="/employees">← Back to list</a>
+
+</div>
+
+
+
+<div class="card-grid">
+
+<!-- EMPLOYEE DETAILS -->
+
+<div class="info-card">
+
+<h4>EMPLOYEE DETAILS</h4>
+
+<div class="info-grid">
+
+<div>
+<label>FULL NAME</label>
+<p>{{ employee.name }}</p>
+</div>
+
+<div>
+<label>EMPLOYEE ID</label>
+<p>—</p>
+</div>
+
+<div>
+<label>DEPARTMENT</label>
+<p>{{ employee.department or "-" }}</p>
+</div>
+
+<div>
+<label>JOINING DATE</label>
+<p>{{ employee.joining_date or "-" }}</p>
+</div>
+
+<div>
+<label>MOBILE</label>
+<p>{{ employee.mobile }}</p>
+</div>
+
+<div>
+<label>ALTERNATIVE MOBILE</label>
+<p>{{ employee.alt_mobile or "-" }}</p>
+</div>
+
+<div>
+<label>AADHAAR NUMBER</label>
+<p>{{ employee.aadhaar }}</p>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- FAMILY -->
+
+<div class="info-card">
+
+<h4>FAMILY CONTACTS</h4>
+
+<div class="info-grid">
+
+<div>
+<label>SPOUSE</label>
+<p>{{ employee.spouse or "-" }}</p>
+</div>
+
+<div>
+<label>FATHER / MOTHER</label>
+<p>{{ employee.parents or "-" }}</p>
+</div>
+
+<div>
+<label>BROTHER / SISTER</label>
+<p>{{ employee.siblings or "-" }}</p>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ADDRESS -->
+
+<div class="info-card">
+
+<h4>ADDRESS & EDUCATION</h4>
+
+<div class="info-grid">
+
+<div>
+<label>ADDRESS</label>
+<p>{{ employee.address }}</p>
+</div>
+
+<div>
+<label>EDUCATION</label>
+<p>{{ employee.education }}</p>
+</div>
+
+<div>
+<label>TECHNICAL EDUCATION</label>
+<p>{{ employee.technical or "-" }}</p>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- EXPERIENCE -->
+
+<div class="info-card">
+
+<h4>EXPERIENCE</h4>
+
+<div class="info-grid">
+
+<div>
+<label>WORK EXPERIENCE</label>
+<p>{{ employee.experience or "-" }}</p>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ASSETS -->
+
+<div class="info-card">
+
+<h4>ASSETS PROVIDED</h4>
+
+<div class="info-grid">
+
+<div>
+<label>SYSTEM DETAILS</label>
+<p>{{ employee.system_details or "-" }}</p>
+</div>
+
+<div>
+<label>ASSETS PROVIDED</label>
+<p>{{ employee.assets or "-" }}</p>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- UNIFORM -->
+
+<div class="info-card">
+
+<h4>UNIFORM ISSUED</h4>
+
+<div class="info-grid">
+
+<div>
+<label>PANTS</label>
+<p>{{ employee.pants or 0 }}</p>
+</div>
+
+<div>
+<label>SHIRTS</label>
+<p>{{ employee.shirts or 0 }}</p>
+</div>
+
+<div>
+<label>OTHER ITEMS</label>
+<p>{{ employee.other_items or "-" }}</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- DOCUMENTS -->
+
+<div class="documents">
+
+<h3>Documents</h3>
+
+<div class="doc-grid">
+
+<div class="doc-card">
+
+<p>CV / Bio Data</p>
+
+{% if employee.cv_file %}
+<a class="download-btn" href="/uploads/cv/{{ employee.cv_file }}" download>Download</a>
+{% else %}
+<p>Not uploaded</p>
+{% endif %}
+
+</div>
+
+
+<div class="doc-card">
+
+<p>Aadhaar Card</p>
+
+{% if employee.aadhaar_file %}
+<a class="download-btn" href="/uploads/aadhaar/{{ employee.aadhaar_file }}" download>Download</a>
+{% else %}
+<p>Not uploaded</p>
+{% endif %}
+
+</div>
+
+
+<div class="doc-card">
+
+<p>Light Bill</p>
+
+{% if employee.lightbill_file %}
+<a class="download-btn" href="/uploads/lightbill/{{ employee.lightbill_file }}" download>Download</a>
+{% else %}
+<p>Not uploaded</p>
+{% endif %}
+
+</div>
+
+
+<div class="doc-card">
+
+<p>Certificates</p>
+
+{% if employee.certificate_file %}
+<a class="download-btn" href="/uploads/certificates/{{ employee.certificate_file }}" download>Download</a>
+{% else %}
+<p>Not uploaded</p>
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+Record created on {{ employee.created_at }}
+</div>
+
+
+</div>
+
+</body>
+</html>

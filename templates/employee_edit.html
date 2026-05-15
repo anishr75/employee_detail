@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Edit Employee</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="nav-left">
+
+<div class="logo-box">HR</div>
+
+<div class="logo-text">
+<strong>HR Portal</strong>
+<span>Employee record management</span>
+</div>
+
+</div>
+
+<div class="nav-right">
+
+<a class="nav-btn" href="/">👤 Onboard</a>
+<a class="nav-btn active" href="/employees">📋 Employees</a>
+
+</div>
+
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+<h2>Edit Employee</h2>
+
+<form method="POST" action="/employee/update/{{ employee.id }}" enctype="multipart/form-data">
+
+<div class="grid">
+
+<div>
+<label>Full Name</label>
+<input type="text" name="name" value="{{ employee.name }}">
+</div>
+
+<div class="grid">
+
+<div>
+<label>Employee ID</label>
+<input type="text" value="{{ employee.id }}" readonly>
+</div>
+
+</div>
+
+<div>
+<label>Department</label>
+<input type="text" name="department" value="{{ employee.department }}">
+</div>
+
+<div>
+<label>Joining Date</label>
+<input type="date" name="joining_date" value="{{ employee.joining_date }}">
+</div>
+
+<div>
+<label>Mobile</label>
+<input type="text" name="mobile" value="{{ employee.mobile }}">
+</div>
+
+<div>
+<label>Alternative Mobile</label>
+<input type="text" name="alt_mobile" value="{{ employee.alt_mobile }}">
+</div>
+
+<div>
+<label>Aadhaar</label>
+<input type="text" name="aadhaar" value="{{ employee.aadhaar }}">
+</div>
+
+<div>
+<label>Spouse</label>
+<input type="text" name="spouse" value="{{ employee.spouse }}">
+</div>
+
+<div>
+<label>Parents</label>
+<input type="text" name="parents" value="{{ employee.parents }}">
+</div>
+
+<div>
+<label>Siblings</label>
+<input type="text" name="siblings" value="{{ employee.siblings }}">
+</div>
+
+<div>
+<label>Education</label>
+<input type="text" name="education" value="{{ employee.education }}">
+</div>
+
+<div>
+<label>Technical</label>
+<input type="text" name="technical" value="{{ employee.technical }}">
+</div>
+
+</div>
+
+<label>Address</label>
+<textarea name="address">{{ employee.address }}</textarea>
+
+<label>Experience</label>
+<textarea name="experience">{{ employee.experience }}</textarea>
+
+<label>System Details</label>
+<input type="text" name="system_details" value="{{ employee.system_details }}">
+
+<label>Assets Provided</label>
+<textarea name="assets">{{ employee.assets }}</textarea>
+
+
+<div class="grid">
+
+<div>
+<label>Pants Issued</label>
+<input type="number" name="pants" value="{{ employee.pants }}">
+</div>
+
+<div>
+<label>Shirts Issued</label>
+<input type="number" name="shirts" value="{{ employee.shirts }}">
+</div>
+
+</div>
+
+<label>Other Items</label>
+<textarea name="other_items">{{ employee.other_items }}</textarea>
+
+<h3>Update Documents</h3>
+
+<div class="grid">
+
+<div>
+<label>Replace CV</label>
+<input type="file" name="cv">
+</div>
+
+<div>
+<label>Replace Aadhaar</label>
+<input type="file" name="aadhaar_image">
+</div>
+
+<div>
+<label>Replace Light Bill</label>
+<input type="file" name="lightbill">
+</div>
+
+<div>
+<label>Replace Certificates</label>
+<input type="file" name="certificates">
+</div>
+
+</div>
+
+<div class="buttons">
+
+<a href="/employees">
+<button type="button" id="prev">Cancel</button>
+</a>
+
+<button type="submit" id="next">Update Employee</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Employee Onboarding</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+<header class="topbar">
+
+<div class="nav-left">
+
+<div class="logo-box">
+HR
+</div>
+
+<div class="logo-text">
+<strong>HR Portal</strong>
+<span>Employee record management</span>
+</div>
+
+</div>
+
+
+<div class="nav-right">
+
+<a class="nav-btn active" href="/">
+👤 Onboard
+</a>
+
+<a class="nav-btn" href="/employees">
+📋 Employees
+</a>
+
+</div>
+
+</header>
+<div class="container">
+
+<div class="card">
+
+<div class="form-header" id="formHeader">
+
+<h3 id="formTitle">Personal Details</h3>
+
+<p>
+Fields marked with <span class="req">*</span> are required.
+</p>
+
+</div>
+
+
+<!-- STEP INDICATOR -->
+
+<div class="step-indicator">
+
+<div class="step active">
+<div class="step-circle">1</div>
+<span>Personal</span>
+</div>
+
+<div class="step">
+<div class="step-circle">2</div>
+<span>Family</span>
+</div>
+
+<div class="step">
+<div class="step-circle">3</div>
+<span>Address & Education</span>
+</div>
+
+<div class="step">
+<div class="step-circle">4</div>
+<span>Experience</span>
+</div>
+
+<div class="step">
+<div class="step-circle">5</div>
+<span>Documents</span>
+</div>
+
+<div class="step">
+<div class="step-circle">6</div>
+<span>Assets</span>
+</div>
+
+<div class="step">
+<div class="step-circle">7</div>
+<span>Uniform</span>
+</div>
+
+</div>
+
+
+<form id="employeeForm"
+action="/submit"
+method="POST"
+enctype="multipart/form-data">
+
+
+<!-- PERSONAL -->
+
+<div class="form-step active">
+
+<div class="grid">
+
+<div>
+<label>Complete Name <span class="req">*</span></label>
+<input type="text" name="name" placeholder="John Doe" required>
+</div>
+
+<div>
+<label>Department</label>
+<input type="text" name="department" placeholder="Operations">
+</div>
+
+<div>
+<label>Joining Date</label>
+<input type="date" name="joining_date">
+</div>
+
+<div>
+<label>Mobile Number <span class="req">*</span></label>
+
+<input 
+type="tel" 
+name="mobile"
+pattern="[6-9]{1}[0-9]{9}"
+placeholder="9876543210"
+required
+>
+
+<div class="helper-text">
+10 digits, starting with 6–9
+</div>
+
+</div>
+
+<div>
+<label>Alternative Number</label>
+<input 
+type="tel"
+name="alt_mobile"
+pattern="[6-9]{1}[0-9]{9}"
+maxlength="10"
+placeholder="9876543210"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FAMILY -->
+<div class="form-step">
+
+<div class="grid">
+
+<div>
+<label>Wife / Husband Number</label>
+<input 
+type="tel"
+name="spouse"
+pattern="[6-9]{1}[0-9]{9}"
+maxlength="10"
+placeholder="9876543210"
+>
+</div>
+
+<div>
+<label>Father / Mother Number *</label>
+<input 
+type="tel"
+name="parents"
+pattern="[6-9]{1}[0-9]{9}"
+maxlength="10"
+placeholder="9876543210"
+required
+>
+</div>
+
+<div>
+<label>Brother / Sister Number</label>
+<input 
+type="tel"
+name="siblings"
+pattern="[6-9]{1}[0-9]{9}"
+maxlength="10"
+placeholder="9876543210"
+>
+</div>
+
+</div>
+
+</div>
+<!-- ADDRESS -->
+
+<div class="form-step">
+
+<label>Full Address <span class="req">*</span></label>
+<textarea name="address" required></textarea>
+
+<div class="grid">
+
+<div>
+<label>Education Qualification <span class="req">*</span></label>
+<input type="text" name="education">
+</div>
+
+<div>
+<label>Technical Education</label>
+<input type="text" name="technical">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- EXPERIENCE -->
+
+<div class="form-step">
+
+<label>Experience</label>
+<textarea name="experience"></textarea>
+
+<label>Aadhaar Card Number <span class="req">*</span></label>
+
+<input
+type="text"
+name="aadhaar"
+maxlength="12"
+pattern="[0-9]{12}"
+placeholder="123412341234"
+required
+>
+
+<div class="helper-text">
+Exactly 12 digits
+</div>
+
+</div>
+
+
+<!-- DOCUMENTS -->
+
+<div class="form-step">
+
+<div class="grid">
+
+<div class="upload-box">
+
+<label>CV / Bio Data <span class="req">*</span></label>
+
+<input 
+type="file"
+name="cv"
+accept=".jpg,.jpeg,.png,.pdf"
+required
+>
+
+<div class="helper-text">
+JPG, PNG or PDF · Max 5MB
+</div>
+
+</div>
+
+
+<div class="upload-box">
+
+<label>Aadhaar Card Image <span class="req">*</span></label>
+
+<input 
+type="file"
+name="aadhaar_image"
+accept=".jpg,.jpeg,.png,.pdf"
+required
+>
+
+<div class="helper-text">
+JPG, PNG or PDF · Max 5MB
+</div>
+
+</div>
+
+
+<div class="upload-box">
+
+<label>Light Bill</label>
+
+<input 
+type="file"
+name="lightbill"
+accept=".jpg,.jpeg,.png,.pdf"
+>
+
+<div class="helper-text">
+JPG, PNG or PDF · Max 5MB
+</div>
+
+</div>
+
+
+<div class="upload-box">
+
+<label>Certificates</label>
+
+<input 
+type="file"
+name="certificates"
+accept=".jpg,.jpeg,.png,.pdf"
+>
+
+<div class="helper-text">
+Optional
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- ASSETS -->
+
+<div class="form-step">
+
+<label>System Details</label>
+<input type="text" name="system_details">
+
+<label>Assets Provided</label>
+<textarea name="assets"></textarea>
+
+</div>
+
+
+<!-- UNIFORM -->
+
+<div class="form-step">
+
+<div class="grid">
+
+<div>
+<label>Pants Issued</label>
+<input type="number" name="pants">
+</div>
+
+<div>
+<label>Shirts Issued</label>
+<input type="number" name="shirts">
+</div>
+
+</div>
+
+<label>Other Issued Items</label>
+<textarea name="other_items"></textarea>
+
+</div>
+
+
+<div class="buttons">
+
+<button type="button" id="prev">Back</button>
+<button type="button" id="next">Next</button>
+<button type="submit" id="submit" style="display:none;">Submit Record</button>
+
+</div>
+
+
+</form>
+
+</div>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
