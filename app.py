@@ -50,8 +50,11 @@ def register():
 
     return redirect("/?tab=login")
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
+
+    if request.method == "GET":
+        return redirect("/")
 
     login_id = request.form.get("login_id")
     password = request.form.get("password")
